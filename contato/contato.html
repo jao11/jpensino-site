@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contato | João Pedro</title>
+
+    <link rel="icon" type="image/png" href="../imagens/aulas_3.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* =========================================
+           RESET
+        ========================================= */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        html{
+            scroll-behavior:smooth;
+        }
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            overflow-x:hidden;
+            transition:
+            background 0.4s,
+            color 0.4s;
+            padding-top:100px;
+        }
+        section{
+            width:100%;
+            max-width:1200px;
+            margin:auto;
+            padding:90px 25px;
+        }
+        h1{
+            font-size:4rem;
+            line-height:1.1;
+            margin-bottom:25px;
+        }
+        h2{
+            font-size:2.2rem;
+            margin-bottom:25px;
+        }
+        p{
+            line-height:1.9;
+            font-size:1.08rem;
+        }
+        /* =========================================
+           DARK MODE
+        ========================================= */
+        body.dark{
+            background:
+            linear-gradient(
+                135deg,
+                #020617,
+                #0f172a,
+                #111827
+            );
+            color:#f8fafc;
+        }
+        body.dark .barra-navegacao{
+            background: rgba(2,6,23,0.85);
+            border-bottom:1px solid rgba(255,255,255,0.05);
+        }
+        body.dark .menu-links a{
+            color:#cbd5e1;
+        }
+        body.dark .menu-links a:hover{
+            color:#60a5fa;
+        }
+        body.dark .subtitulo{
+            color:#cbd5e1;
+        }
+        body.dark .card-contato{
+            background: rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+        }
+        body.dark input,
+        body.dark textarea,
+        body.dark select{
+            background: rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.08);
+            color:#f8fafc;
+        }
+        body.dark input::placeholder,
+        body.dark textarea::placeholder{
+            color:#94a3b8;
+        }
+        /* =========================================
+           LIGHT MODE
+        ========================================= */
+        body.light{
+            background:
+            linear-gradient(
+                135deg,
+                #f8fafc,
+                #e2e8f0,
+                #cbd5e1
+            );
+            color:#0f172a;
+        }
+        body.light .barra-navegacao{
+            background: rgba(255,255,255,0.85);
+            border-bottom:1px solid rgba(0,0,0,0.08);
+        }
+        body.light .menu-links a{
+            color:#334155;
+        }
+        body.light .menu-links a:hover{
+            color:#2563eb;
+        }
+        body.light .subtitulo{
+            color:#475569;
+        }
+        body.light .card-contato{
+            background:white;
+            border:1px solid rgba(0,0,0,0.08);
+        }
+        body.light input,
+        body.light textarea,
+        body.light select{
+            background:#f8fafc;
+            border:1px solid #cbd5e1;
+            color:#0f172a;
+        }
+        /* =========================================
+           NAVBAR
+        ========================================= */
+        .barra-navegacao{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 40px;
+            z-index:1000;
+            backdrop-filter:blur(14px);
+        }
+        .logo{
+            font-size:1.1rem;
+            font-weight:bold;
+        }
+        .nav-direita{
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+        .menu-links{
+            display:flex;
+            gap:20px;
+        }
+        .menu-links a{
+            text-decoration:none;
+            font-weight:500;
+            transition:0.3s;
+        }
+        .menu-links a.ativo{
+            color:#60a5fa;
+        }
+        /* =========================================
+           BOTÃO TEMA
+        ========================================= */
+        .tema-toggle{
+            width:45px;
+            height:45px;
+            border:none;
+            border-radius:50%;
+            cursor:pointer;
+            background:#2563eb;
+            color:white;
+            font-size:1rem;
+            transition:0.3s;
+        }
+        .tema-toggle:hover{
+            transform:scale(1.08);
+            background:#1d4ed8;
+        }
+        /* =========================================
+           HERO
+        ========================================= */
+        .hero-contato{
+            min-height:50vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            text-align:center;
+        }
+        .hero-contato h1{
+            max-width:900px;
+            margin:auto;
+            margin-bottom:25px;
+        }
+        .subtitulo{
+            max-width:750px;
+            margin:auto;
+            font-size:1.2rem;
+        }
+        /* =========================================
+           GRID CONTATO
+        ========================================= */
+        .grid-contato{
+            display:grid;
+            grid-template-columns:
+            1fr 1.2fr;
+            gap:35px;
+            margin-top:60px;
+        }
+        /* =========================================
+           CARDS
+        ========================================= */
+        .card-contato{
+            padding:35px;
+            border-radius:24px;
+        }
+        .card-contato h2{
+            font-size:1.5rem;
+        }
+        .card-contato p{
+            margin-bottom:25px;
+        }
+        /* =========================================
+           BOTÕES
+        ========================================= */
+        .botao-whatsapp{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            text-decoration:none;
+            background:#22c55e;
+            color:white;
+            padding:14px 24px;
+            border-radius:12px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+        .botao-whatsapp:hover{
+            background:#16a34a;
+            transform:translateY(-3px);
+        }
+        .botoes-redes{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+            margin-top:25px;
+        }
+        .botao-rede{
+            text-decoration:none;
+            padding:14px;
+            border-radius:12px;
+            font-weight:bold;
+            transition:0.3s;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+        }
+        .youtube{
+            background:#7f1d1d;
+            color:white;
+        }
+        .youtube:hover{
+            background:#dc2626;
+        }
+        .instagram{
+            background:#831843;
+            color:white;
+        }
+        .instagram:hover{
+            background:#db2777;
+        }
+        /* =========================================
+           FORMULÁRIO
+        ========================================= */
+        .grupo-campo{
+            margin-bottom:22px;
+        }
+        .grupo-campo label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+        }
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:14px;
+            border-radius:12px;
+            font-size:1rem;
+            outline:none;
+            transition:0.3s;
+        }
+        textarea{
+            resize:vertical;
+            min-height:140px;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus{
+            border-color:#3b82f6;
+        }
+        .botao-enviar{
+            width:100%;
+            border:none;
+            background:#2563eb;
+            color:white;
+            padding:16px;
+            border-radius:12px;
+            font-size:1rem;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        .botao-enviar:hover{
+            background:#1d4ed8;
+            transform:translateY(-3px);
+        }
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+        .rodape{
+            text-align:center;
+            padding:40px;
+            border-top:1px solid rgba(255,255,255,0.08);
+        }
+        .rodape p{
+            font-size:0.95rem;
+        }
+        /* =========================================
+           RESPONSIVO
+        ========================================= */
+        @media(max-width:950px){
+            .barra-navegacao{
+                flex-direction:column;
+                gap:20px;
+                padding:20px;
+            }
+            .nav-direita{
+                flex-direction:column;
+                gap:15px;
+            }
+            .menu-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+            h1{
+                font-size:2.8rem;
+            }
+            .grid-contato{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
+    <header class="barra-navegacao">
+        <div class="logo">
+            Professor • Físico • Desenvolvedor
+        </div>
+        <div class="nav-direita">
+            <nav class="menu-links">
+                <a href="../index.html">Início</a>
+                <a href="../sobre_mim/sobre_mim.html">Sobre Mim</a>
+                <a href="../servicos/servicos.html">Serviços</a>
+                <a href="../materiais/material.html">Materiais</a>
+                <a href="../contato/contato.html" class="ativo">Contato</a>
+            </nav>
+
+            <button class="tema-toggle" onclick="toggleTheme()">
+                🌙
+            </button>
+        </div>
+    </header>
+    <!-- =========================================
+         HERO
+    ========================================= -->
+    <section class="hero-contato">
+        <h1>
+            Vamos conversar?
+        </h1>
+        <p class="subtitulo">
+            Tire dúvidas, agende aulas
+            ou converse sobre projetos
+            de tecnologia e desenvolvimento.
+        </p>
+    </section>
+    <!-- =========================================
+         CONTATO
+    ========================================= -->
+    <section>
+        <div class="grid-contato">
+            <!-- INFO -->
+            <div class="card-contato">
+                <h2>
+                    Contato direto
+                </h2>
+                <p>
+                    Se você deseja agendar
+                    aulas particulares,
+                    reforço universitário
+                    ou conversar sobre
+                    desenvolvimento de sites,
+                    automações e análise de dados,
+                    pode entrar em contato diretamente.
+                </p>
+                <a href="https://wa.me/5521979848975" target="_blank" class="botao-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    Chamar no WhatsApp
+                </a>
+                <br><br><br>
+                <h2>
+                    Outros canais
+                </h2>
+                <p>
+                    <strong>Email:</strong>
+                    jpsdsantos2@gmail.com
+                    <br><br>
+                    <strong>Atendimento:</strong>
+                    Segunda a Quinta,
+                    das 08h às 20h.
+                </p>
+                <div class="botoes-redes">
+                    <a href="#" class="botao-rede youtube">
+                        <i class="fab fa-youtube"></i>
+                        Canal no YouTube
+                    </a>
+                    <a href="#" class="botao-rede instagram">
+                        <i class="fab fa-instagram"></i>
+                        Perfil no Instagram
+                    </a>
+                </div>
+            </div>
+            <!-- FORM -->
+            <div class="card-contato">
+                <h2>
+                    Enviar mensagem
+                </h2>
+                <form
+                action="https://formspree.io/f/xredkaow" method="POST">
+                    <div class="grupo-campo">
+                        <label>
+                            Seu nome
+                        </label>
+                        <input
+                        type="text"
+                        name="nome"
+                        placeholder="Ex: Carlos Silva"
+                        required>
+                    </div>
+                    <div class="grupo-campo">
+                        <label>
+                            Seu e-mail
+                        </label>
+                        <input
+                        type="email"
+                        name="email"
+                        placeholder="Ex: email@email.com"
+                        required>
+                    </div>
+                    <div class="grupo-campo">
+                        <label>
+                            Assunto
+                        </label>
+                        <select name="interesse"required>
+                            <option value="">
+                                Selecione...
+                            </option>
+                            <option value="enem">
+                                ENEM / UERJ
+                            </option>
+                            <option value="reforco">
+                                Reforço Escolar
+                            </option>
+                            <option value="universitario">
+                                Ensino Superior
+                            </option>
+                            <option value="tecnologia">
+                                Desenvolvimento & Dados
+                            </option>
+                        </select>
+                    </div>
+                    <div class="grupo-campo">
+                        <label>
+                            Sua mensagem
+                        </label>
+                        <textarea name="mensagem" placeholder="Descreva brevemente sua necessidade..." required></textarea>
+                    </div>
+                    <button type="submit" class="botao-enviar">
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- =========================================
+         RODAPÉ
+    ========================================= -->
+    <footer class="rodape">
+        <p>
+            © 2026 João Pedro.
+            Todos os direitos reservados.
+        </p>
+        <p>
+            Físico • Programador • Educador
+        </p>
+    </footer>
+    <!-- =========================================
+         SCRIPT TEMA
+    ========================================= -->
+    <script>
+        function toggleTheme(){
+            const body = document.body;
+            const button = document.querySelector(".tema-toggle");
+            if(body.classList.contains("dark")){
+                body.classList.remove("dark");
+                body.classList.add("light");
+                button.innerHTML = "☀️";
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+            }
+            else{
+                body.classList.remove("light");
+                body.classList.add("dark");
+                button.innerHTML = "🌙";
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+            }
+        }
+        window.onload = () => {
+            const savedTheme = localStorage.getItem("theme");
+            const button = document.querySelector(".tema-toggle");
+            if(savedTheme === "light"){
+                document.body.classList.add("light");
+                button.innerHTML = "☀️";
+            }
+            else{
+                document.body.classList.add("dark");
+                button.innerHTML = "🌙";
+            }
+        }
+    </script>
+</body>
+</html>

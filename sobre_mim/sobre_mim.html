@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sobre Mim | João Pedro</title>
+
+    <link rel="icon" type="image/png" href="../imagens/aulas_1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* =========================================
+           RESET
+        ========================================= */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        html{
+            scroll-behavior:smooth;
+        }
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            overflow-x:hidden;
+            transition:
+            background 0.4s,
+            color 0.4s;
+            padding-top:100px;
+        }
+        section{
+            width:100%;
+            max-width:1200px;
+            margin:auto;
+            padding:90px 25px;
+        }
+        h1{
+            font-size:4rem;
+            line-height:1.1;
+            margin-bottom:30px;
+        }
+        h2{
+            font-size:2.2rem;
+            margin-bottom:30px;
+        }
+        p{
+            line-height:1.9;
+            font-size:1.1rem;
+        }
+        /* =========================================
+           TEMA ESCURO
+        ========================================= */
+        body.dark{
+            background:
+            linear-gradient(
+                135deg,
+                #020617,
+                #0f172a,
+                #111827
+            );
+            color:#f8fafc;
+        }
+        body.dark .barra-navegacao{
+            background: rgba(2,6,23,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        body.dark .menu-links a{
+            color:#cbd5e1;
+        }
+        body.dark .menu-links a:hover{
+            color:#60a5fa;
+        }
+        body.dark .descricao{
+            color:#cbd5e1;
+        }
+        body.dark .card{
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        body.dark .bloco-destaque{
+            background:rgba(37,99,235,0.12);
+            border: 1px solid rgba(37,99,235,0.3);
+        }
+        /* =========================================
+           TEMA CLARO
+        ========================================= */
+        body.light{
+            background:
+            linear-gradient(
+                135deg,
+                #f8fafc,
+                #e2e8f0,
+                #cbd5e1
+            );
+            color:#0f172a;
+        }
+        body.light .barra-navegacao{
+            background: rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        body.light .menu-links a{
+            color:#334155;
+        }
+        body.light .menu-links a:hover{
+            color:#2563eb;
+        }
+        body.light .descricao{
+            color:#475569;
+        }
+        body.light .card{
+            background:white;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        body.light .bloco-destaque{
+            background:#eff6ff;
+            border: 1px solid #bfdbfe;
+        }
+        /* =========================================
+           NAVBAR
+        ========================================= */
+        .barra-navegacao{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 40px;
+            z-index:1000;
+            backdrop-filter:blur(14px);
+        }
+        .logo{
+            font-size:1.1rem;
+            font-weight:bold;
+        }
+        .nav-direita{
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+        .menu-links{
+            display:flex;
+            gap:20px;
+        }
+        .menu-links a{
+            text-decoration:none;
+            font-weight:500;
+            transition:0.3s;
+        }
+        .menu-links a.ativo{
+            color:#60a5fa;
+        }
+        /* =========================================
+           BOTÃO TEMA
+        ========================================= */
+        .tema-toggle{
+            width:45px;
+            height:45px;
+            border:none;
+            border-radius:50%;
+            cursor:pointer;
+            background:#2563eb;
+            color:white;
+            font-size:1rem;
+            transition:0.3s;
+        }
+        .tema-toggle:hover{
+            transform:scale(1.08);
+            background:#1d4ed8;
+        }
+        /* =========================================
+           HERO
+        ========================================= */
+        .hero-sobre{
+            min-height:80vh;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:70px;
+        }
+        .hero-texto{
+            flex:1;
+        }
+        .hero-texto p{
+            margin-bottom:25px;
+        }
+        .descricao{
+            font-size:1.1rem;
+        }
+        /* =========================================
+           FOTO
+        ========================================= */
+        .hero-foto{
+            flex:1;
+            display:flex;
+            justify-content:center;
+        }
+        .foto-container{
+            width:420px;
+            height:520px;
+            overflow:hidden;
+            border-radius:24px;
+            box-shadow: 0 0 50px rgba(37,99,235,0.25);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .foto-container img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        /* =========================================
+           DESTAQUE
+        ========================================= */
+        .bloco-destaque{
+            padding:35px;
+            border-radius:20px;
+            margin-top:40px;
+        }
+        /* =========================================
+           BADGES
+        ========================================= */
+        .badges{
+            display:flex;
+            flex-wrap:wrap;
+            gap:15px;
+            margin-top:40px;
+        }
+        .badge{
+            padding:12px 20px;
+            border-radius:30px;
+            background:#2563eb;
+            color:white;
+            font-size:0.95rem;
+            font-weight:bold;
+        }
+        /* =========================================
+           CARDS
+        ========================================= */
+        .cards{
+            display:grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+            margin-top:50px;
+        }
+        .card{
+            padding:35px;
+            border-radius:20px;
+            transition:0.3s;
+        }
+        .card:hover{
+            transform:translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .card h3{
+            margin-bottom:20px;
+            font-size:1.3rem;
+        }
+        /* =========================================
+           CTA FINAL
+        ========================================= */
+        .cta-final{
+            text-align:center;
+            padding:100px 25px;
+        }
+        .botao-cta{
+            display:inline-block;
+            margin-top:35px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            padding:16px 32px;
+            border-radius:12px;
+            font-weight:bold;
+            transition:0.3s;
+        }
+        .botao-cta:hover{
+            transform:translateY(-4px);
+            background:#1d4ed8;
+        }
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+        .rodape{
+            text-align:center;
+            padding:40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .rodape p{
+            font-size:0.95rem;
+        }
+        /* =========================================
+           RESPONSIVO
+        ========================================= */
+        @media(max-width:950px){
+            .barra-navegacao{
+                flex-direction:column;
+                gap:20px;
+                padding:20px;
+            }
+            .nav-direita{
+                flex-direction:column;
+                gap:15px;
+            }
+            .menu-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+            .hero-sobre{
+                flex-direction:column-reverse;
+                text-align:center;
+            }
+            h1{
+                font-size:2.8rem;
+            }
+            .foto-container{
+                width:280px;
+                height:360px;
+            }
+            .badges{
+                justify-content:center;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
+    <header class="barra-navegacao">
+        <div class="logo">
+            Professor • Físico • Desenvolvedor
+        </div>
+        <div class="nav-direita">
+            <nav class="menu-links">
+                <a href="../index.html">Início</a>
+                <a href="../sobre_mim/sobre_mim.html" class="ativo">Sobre Mim</a>
+                <a href="../servicos/servicos.html">Serviços</a>
+                <a href="../materiais/material.html">Materiais</a>
+                <a href="../contato/contato.html">Contato</a>
+            </nav>
+            <!-- BOTÃO TEMA -->
+            <button class="tema-toggle" onclick="toggleTheme()">
+                🌙
+            </button>
+        </div>
+    </header>
+    <!-- =========================================
+         HERO SOBRE
+    ========================================= -->
+    <section class="hero-sobre">
+        <div class="hero-texto">
+            <h1>
+                Ciência, tecnologia
+                e educação aplicada
+            </h1>
+            <p class="descricao">
+                Minha trajetória sempre foi guiada pela
+                curiosidade de entender como o universo
+                funciona e como a tecnologia pode ser
+                utilizada para resolver problemas reais.
+            </p>
+            <p class="descricao">
+                Sou formado em Licenciatura em Física
+                pela UERJ e atualmente também curso
+                Licenciatura em Matemática.
+                Essa formação me permite atuar
+                entre ensino, análise e desenvolvimento
+                tecnológico.
+            </p>
+            <p class="descricao">
+                Ao longo de mais de 8 anos de experiência,
+                atuei no Ensino Fundamental, Médio e Superior,
+                preparando alunos para vestibulares,
+                universidades e desafios acadêmicos avançados.
+            </p>
+            <div class="badges">
+                <span class="badge">Física</span>
+                <span class="badge">Matemática</span>
+                <span class="badge">Programação</span>
+                <span class="badge">Machine Learning</span>
+            </div>
+        </div>
+        <div class="hero-foto">
+            <div class="foto-container">
+                <img src="../sobre_mim/imagens/mesa_de_trabalho.jpeg" alt="João Pedro">
+            </div>
+        </div>
+    </section>
+    <!-- =========================================
+         BLOCO DESTAQUE
+    ========================================= -->
+    <section>
+        <div class="bloco-destaque">
+            <h2>
+                Foco em resultados reais
+            </h2>
+            <p>
+                Minha metodologia combina
+                ensino personalizado,
+                metodologias ativas e tecnologia
+                para transformar conteúdos complexos
+                em aprendizado claro e eficiente.
+            </p>
+        </div>
+    </section>
+    <!-- =========================================
+         EXPERIÊNCIAS
+    ========================================= -->
+    <section>
+        <h2>
+            Experiência & Atuação
+        </h2>
+        <div class="cards">
+            <div class="card">
+                <h3>
+                    🎯 Preparação ENEM & UERJ
+                </h3>
+                <p class="descricao">
+                    Treinamento focado em vestibulares
+                    de alta concorrência e desenvolvimento
+                    de performance em exatas.
+                </p>
+            </div>
+            <div class="card">
+                <h3>
+                    🎓 Ensino Superior
+                </h3>
+                <p class="descricao">
+                    Experiência com Física Geral,
+                    Cálculo e disciplinas universitárias
+                    voltadas às ciências exatas.
+                </p>
+            </div>
+            <div class="card">
+                <h3>
+                    💻 Programação & Dados
+                </h3>
+                <p class="descricao">
+                    Desenvolvimento de sistemas,
+                    automações e análise de dados
+                    utilizando lógica científica.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- =========================================
+         PESQUISA
+    ========================================= -->
+    <section>
+        <div class="bloco-destaque">
+            <h2>
+                Pesquisa & Tecnologia
+            </h2>
+            <p>
+                Também atuei em análise de dados
+                ligados ao CERN e aplicações
+                de Machine Learning em Física
+                de Altas Energias.
+
+                Essa experiência científica influencia
+                diretamente minha forma de ensinar
+                e desenvolver soluções tecnológicas.
+            </p>
+        </div>
+    </section>
+    <!-- =========================================
+         CTA FINAL
+    ========================================= -->
+    <section class="cta-final">
+        <h2>
+            Quer aprender Física,
+            Matemática ou desenvolver
+            uma solução tecnológica?
+        </h2>
+        <a href="../contato/contatos.html" class="botao-cta">Entrar em Contato</a>
+    </section>
+    <!-- =========================================
+         SCRIPT TEMA
+    ========================================= -->
+    <script>
+        function toggleTheme(){
+            const body = document.body;
+            const button = document.querySelector(".tema-toggle");
+            if(body.classList.contains("dark")){
+                body.classList.remove("dark");
+                body.classList.add("light");
+                button.innerHTML = "☀️";
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+            }
+            else{
+                body.classList.remove("light");
+                body.classList.add("dark");
+                button.innerHTML = "🌙";
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+            }
+        }
+        window.onload = () => {
+            const savedTheme = localStorage.getItem("theme");
+            const button = document.querySelector(".tema-toggle");
+            if(savedTheme === "light"){
+                document.body.classList.add("light");
+                button.innerHTML = "☀️";
+            }
+            else{
+                document.body.classList.add("dark");
+                button.innerHTML = "🌙";
+            }
+        }
+    </script>
+</body>
+</html>

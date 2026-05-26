@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Materiais | João Pedro
+    </title>
+
+    <link rel="icon" type="image/png" href="../imagens/aulas_1.png">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* =========================================
+        RESET
+        ========================================= */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        html{
+            scroll-behavior:smooth;
+        }
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            overflow-x:hidden;
+            transition: background 0.4s, color 0.4s;
+            padding-top:110px;
+        }
+        /* =========================================
+        BODY THEMES
+        ========================================= */
+        body.dark{
+            background:
+                linear-gradient(
+                    135deg,
+                    #020617,
+                    #0f172a,
+                    #111827
+                );
+            color:#f8fafc;
+        }
+        body.light{
+            background:
+            linear-gradient(
+                135deg,
+                #f8fafc,
+                #e2e8f0,
+                #cbd5e1
+            );
+            color:#0f172a;
+        }
+        /* =========================================
+        SECTION
+        ========================================= */
+        section{
+            width:100%;
+        }
+        /* =========================================
+        NAVBAR
+        ========================================= */
+        .barra-navegacao{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 40px;
+            z-index:1000;
+            backdrop-filter:blur(14px);
+        }
+        body.dark .barra-navegacao{
+            background:rgba(2,6,23,0.88);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        body.light .barra-navegacao{
+            background:rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .logo{
+            font-size:1.1rem;
+            font-weight:bold;
+        }
+        .nav-direita{
+            display:flex;
+            align-items:center;
+            gap:25px;
+        }
+        .menu-links{
+            display:flex;
+            gap:20px;
+        }
+        .menu-links a{
+            text-decoration:none;
+            font-weight:500;
+            transition:0.3s;
+        }
+        body.dark .menu-links a{
+            color:#cbd5e1;
+        }
+        body.light .menu-links a{
+            color:#334155;
+        }
+        body.dark .menu-links a:hover{
+            color:#60a5fa;
+        }
+        body.light .menu-links a:hover{
+            color:#2563eb;
+        }
+        .menu-links a.ativo{
+            color:#60a5fa;
+        }
+        /* =========================================
+        BOTÃO TEMA
+        ========================================= */
+        .tema-toggle{
+            width:45px;
+            height:45px;
+            border:none;
+            border-radius:50%;
+            cursor:pointer;
+            background:#2563eb;
+            color:white;
+            font-size:1rem;
+            transition:0.3s;
+        }
+        .tema-toggle:hover{
+            transform:scale(1.08);
+            background:#1d4ed8;
+        }
+        /* =========================================
+        HERO
+        ========================================= */
+        .hero{
+            min-height:45vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            text-align:center;
+            padding:40px;
+        }
+        .hero h1{
+            font-size:4rem;
+            line-height:1.1;
+            margin-bottom:25px;
+        }
+        .subtitulo{
+            max-width:850px;
+            margin:auto;
+            font-size:1.2rem;
+            line-height:1.8;
+        }
+        body.dark .subtitulo{
+            color:#cbd5e1;
+        }
+        body.light .subtitulo{
+            color:#475569;
+        }
+        /* =========================================
+        LAYOUT
+        ========================================= */
+        .layout{
+            display:flex;
+            min-height:
+            calc(100vh - 90px);
+        }
+        /* =========================================
+        SIDEBAR
+        ========================================= */
+        .sidebar{
+            position:fixed;
+            top:110px;
+            left:0;
+            width:280px;
+            height: calc(100vh - 110px);
+            overflow-y:auto;
+            padding:35px 25px;
+            backdrop-filter:blur(18px);
+            z-index:900;
+            transition:0.3s;
+        }
+        body.dark .sidebar{
+            background: rgba(2,6,23,0.88);
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+        body.light .sidebar{
+            background: rgba(255,255,255,0.92);
+            border-right: 1px solid rgba(0,0,0,0.08);
+        }
+        /* Scrollbar */
+        .sidebar::-webkit-scrollbar{
+            width:8px;
+        }
+        .sidebar::-webkit-scrollbar-thumb{
+            background:#2563eb;
+            border-radius:999px;
+        }
+        .sidebar::-webkit-scrollbar-track{
+            background:transparent;
+        }
+        /* =========================================
+        TÍTULOS SIDEBAR
+        ========================================= */
+        .sidebar h2{
+            font-size:1.5rem;
+            margin-bottom:25px;
+        }
+        .sidebar h3{
+            font-size:0.95rem;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-top:30px;
+            margin-bottom:14px;
+            color:#60a5fa;
+        }
+        /* =========================================
+        MENU SIDEBAR
+        ========================================= */
+        .sidebar-menu{
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+        .sidebar-link{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            text-decoration:none;
+            padding:14px 16px;
+            border-radius:14px;
+            font-weight:500;
+            transition:0.3s;
+        }
+        /* DARK */
+        body.dark .sidebar-link{
+            color:#cbd5e1;
+        }
+        body.dark .sidebar-link:hover{
+            background: rgba(37,99,235,0.18);
+            color:white;
+            transform:translateX(5px);
+        }
+        body.dark .sidebar-link.ativo{
+            background:#2563eb;
+            color:white;
+        }
+        /* LIGHT */
+        body.light .sidebar-link{
+            color:#334155;
+        }
+        body.light .sidebar-link:hover{
+            background:#eff6ff;
+            color:#1d4ed8;
+            transform:translateX(5px);
+        }
+        body.light .sidebar-link.ativo{
+            background:#2563eb;
+            color:white;
+        }
+        /* =========================================
+        CONTEÚDO
+        ========================================= */
+        .conteudo{
+            flex:1;
+            margin-left:280px;
+            width: calc(100% - 280px);
+            padding:40px;
+        }
+        /* =========================================
+        BLOCOS
+        ========================================= */
+        .bloco{
+            margin-bottom:100px;
+            scroll-margin-top:120px;
+        }
+        .bloco h1{
+            font-size:3rem;
+            margin-bottom:10px;
+        }
+        .bloco h2{
+            font-size:2rem;
+            margin-bottom:15px;
+        }
+        .bloco h3{
+            font-size:1.4rem;
+            margin-bottom:20px;
+        }
+        /* =========================================
+        GRID
+        ========================================= */
+        .grid-materiais{
+            display:grid;
+            grid-template-columns:
+            repeat(auto-fit,minmax(320px,1fr));
+            gap:30px;
+            margin-top:25px;
+        }
+        /* =========================================
+        CARDS
+        ========================================= */
+        .card-material{
+            padding:30px;
+            border-radius:24px;
+            transition:0.35s;
+        }
+        body.dark .card-material{
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        body.light .card-material{
+            background:white;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .card-material:hover{
+            transform:translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.20);
+        }
+        .card-material p{
+            line-height:1.8;
+        }
+        /* =========================================
+        TAG
+        ========================================= */
+        .tag{
+            display:inline-block;
+            margin-bottom:18px;
+            padding:8px 14px;
+            border-radius:999px;
+            font-size:0.82rem;
+            font-weight:bold;
+            background:#2563eb;
+            color:white;
+        }
+        /* =========================================
+        BOTÕES
+        ========================================= */
+        .acoes{
+            display:flex;
+            flex-wrap:wrap;
+            gap:15px;
+            margin-top:25px;
+        }
+        .botao{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            text-decoration:none;
+            padding:14px 22px;
+            border-radius:14px;
+            font-weight:bold;
+            transition:0.3s;
+            cursor:pointer;
+            border:none;
+            background:#2563eb;
+            color:white;
+        }
+        .botao:hover{
+            background:#1d4ed8;
+            transform:translateY(-3px);
+        }
+        .botao.secundario{
+            background:transparent;
+        }
+        body.dark .botao.secundario{
+            border: 1px solid rgba(255,255,255,0.12);
+            color:white;
+        }
+        body.light .botao.secundario{
+            border: 1px solid rgba(0,0,0,0.08);
+            color:#0f172a;
+        }
+        .botao.secundario:hover{
+            background: rgba(37,99,235,0.12);
+        }
+        /* =========================================
+        SIMULADOR
+        ========================================= */
+        .simulador-box{
+            margin-top:30px;
+        }
+        .inputs{
+            display:grid;
+            grid-template-columns:
+            repeat(auto-fit,minmax(180px,1fr));
+            gap:20px;
+            margin-bottom:25px;
+        }
+        .inputs label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+        }
+        .inputs input{
+            width:100%;
+            padding:12px;
+            border-radius:12px;
+            font-size:1rem;
+        }
+        body.dark .inputs input{
+            background:#0f172a;
+            color:white;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        body.light .inputs input{
+            background:white;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .grafico{
+            margin-top:35px;
+            height:350px;
+        }
+        /* =========================================
+        RODAPÉ
+        ========================================= */
+        .rodape{
+            margin-left:280px;
+            width: calc(100% - 280px);
+            text-align:center;
+            padding:40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .rodape p{
+            font-size:0.95rem;
+            line-height:1.8;
+        }
+        /* =========================================
+        RESPONSIVO
+        ========================================= */
+        @media(max-width:950px){
+            .barra-navegacao{
+                flex-direction:column;
+                gap:20px;
+                padding:20px;
+            }
+            .nav-direita{
+                flex-direction:column;
+                gap:15px;
+            }
+            .menu-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+            .layout{
+                flex-direction:column;
+            }
+            .sidebar{
+                position:relative;
+                width:100%;
+                height:auto;
+                top:0;
+                border-right:none;
+            }
+            .conteudo{
+                margin-left:0;
+                width:100%;
+                padding:25px;
+            }
+            .rodape{
+                margin-left:0;
+                width:100%;
+            }
+            .hero h1{
+                font-size:2.8rem;
+            }
+        }
+</style>
+</head>
+
+<body class="dark">
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
+    <header class="barra-navegacao">
+        <div class="logo">
+            Professor • Físico • Desenvolvedor
+        </div>
+        <div class="nav-direita">
+            <nav class="menu-links">
+                <a href="../index.html">Início</a>
+                <a href="../sobre_mim/sobre_mim.html">Sobre Mim</a>
+                <a href="../servicos/servicos.html">Serviços</a>
+                <a href="../materiais/material.html" class="ativo">Materiais</a>
+                <a href="../contato/contato.html">Contato</a>
+            </nav>
+            <button class="tema-toggle" onclick="toggleTheme()">
+                🌙
+            </button>
+        </div>
+    </header>
+    <!-- =========================================
+         HERO
+    ========================================= -->
+    <section class="hero">
+        <h1>
+            Biblioteca de Conteúdos
+        </h1>
+        <p class="subtitulo">
+            Materiais de Física, Matemática,
+            vestibulares e conteúdos universitários
+            organizados para complementar
+            as aulas e acelerar seu aprendizado.
+        </p>
+    </section>
+    <!-- =========================================
+         LAYOUT
+    ========================================= -->
+
+    <section>
+        <div class="layout">
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <h2>Vestibulares</h2>
+                <h3>Física</h3>
+                <div class="sidebar-menu">
+                    <a href="#cinematica" class="sidebar-link ativo">
+                        <i class="fas fa-running"></i>
+                        Cinemática
+                    </a>
+                    <a href="#optica" class="sidebar-link">
+                        <i class="fas fa-lightbulb"></i>
+                        Óptica
+                    </a>
+                </div>
+                <h3>Matemática</h3>
+
+    <div class="sidebar-menu">
+
+        <a href="#funcao_afim"
+        class="sidebar-link">
+
+            <i class="fas fa-chart-line"></i>
+            Função Afim
+
+        </a>
+
+        <a href="#analise_combinatoria"
+        class="sidebar-link">
+
+            <i class="fas fa-calculator"></i>
+            Análise Combinatória
+
+        </a>
+
+    </div>
+
+    <h3>Universitário</h3>
+
+    <div class="sidebar-menu">
+
+        <a href="#calculo"
+        class="sidebar-link">
+
+            <i class="fas fa-square-root-alt"></i>
+            Cálculo I
+
+        </a>
+
+        <a href="#algebra"
+        class="sidebar-link">
+
+            <i class="fas fa-chart-line"></i>
+            Vetores
+
+        </a>
+
+    </div>
+
+    <h3>Laboratório</h3>
+
+    <div class="sidebar-menu">
+
+        <a href="#MRUV"
+        class="sidebar-link">
+
+            <i class="fas fa-flask"></i>
+            MRUV
+
+        </a>
+
+    </div>
+
+    </aside>
+            <!-- CONTEÚDO -->
+            <div class="conteudo">
+                <!-- CINEMÁTICA -->
+                <div id="cinematica" class="bloco">
+                    <h1>Vestibulares</h1>
+                    <h2>Física</h2>
+                    <h3>Mecânica & Cinemática</h3>
+                    <div class="grid-materiais">
+                        <div class="card-material">
+                            <span class="tag">
+                                Vídeo + Lista
+                            </span>
+                            <h3>
+                                MUV nos Vestibulares
+                            </h3>
+                            <p>
+                                Equações horárias,
+                                análise gráfica e estratégias
+                                para ENEM e UERJ.
+                            </p>
+                            <div class="acoes">
+                                <a href="#" class="botao">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Baixar PDF
+                                </a>
+                                <a href="#" class="botao secundario">
+                                    <i class="fab fa-youtube"></i>
+                                    Assistir Aula
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ÓPTICA -->
+                <div
+                id="optica"
+                class="bloco">
+                    <h2>
+                        Óptica Geométrica
+                    </h2>
+                    <div class="grid-materiais">
+                        <div class="card-material">
+                            <span class="tag">
+                                Resumo Teórico
+                            </span>
+                            <h3>
+                                Espelhos Esféricos
+                            </h3>
+                            <p>
+                                Formação de imagens,
+                                espelhos e aplicações
+                                em vestibulares.
+                            </p>
+                            <div class="acoes">
+                                <a href="#" class="botao">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Baixar Material
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Matemática</h2>
+                    <!-- Expressões -->
+                <div
+                id="expressoes"
+                class="bloco">
+                    <h2>Expressões</h2>
+                    <div class="grid-materiais">
+                        <div class="card-material">
+                            <span class="tag">
+                                Listas
+                            </span>
+                            <h3>
+                                Expressões
+                            </h3>
+                            <p>
+                                Exercícios de expressões matemáticas
+                            </p>
+                            <div class="acoes">
+                                <a href="../materiais/listas/lista_expresoes.pdf" class="botao">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Baixar Material
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- CÁLCULO -->
+                <div
+                id="calculo"
+                class="bloco">
+                    <h2>
+                        Cálculo I
+                    </h2>
+                    <div class="grid-materiais">
+                        <div class="card-material">
+                            <span class="tag">
+                                Conteúdo Exclusivo
+                            </span>
+                            <h3>
+                                Técnicas de Derivação
+                            </h3>
+                            <p>
+                                Regra da cadeia,
+                                derivadas fundamentais
+                                e aplicações.
+                            </p>
+                            <div class="acoes">
+                                <a href="#" class="botao">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Baixar PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SIMULADOR -->
+                
+                <div id="MRUV" class="bloco">
+                    <h2>
+                        🔬 Laboratório Interativo
+                    </h2>
+                    <p>
+                        Explore o Movimento Uniformemente Variado
+                        alterando os parâmetros da equação horária.
+                    </p>
+                    <div class="grid-materiais">
+                        <div class="card-material">
+                            <!--<span class="tag">
+                                Conteúdo Exclusivo
+                            </span> -->
+                            <h3>
+                                Função Horária da Posição
+                            </h3>
+                            <p>
+                                s = s₀ + v₀t + (a/2)t²
+                            </p>
+                            <div class="simulador-box">
+                                <div class="inputs">
+                                    <div>
+                                        <label>
+                                            S₀ (m)
+                                        </label>
+                                        <input
+                                        type="number"
+                                        id="posicao_inicial"
+                                        value="0">
+                                    </div>
+                                    <div>
+                                        <label>
+                                            V₀ (m/s)
+                                        </label>
+                                        <input
+                                        type="number"
+                                        id="velocidade_inicial"
+                                        value="10">
+                                    </div>
+                                    <div>
+                                        <label>
+                                            a (m/s²)
+                                        </label>
+                                        <input
+                                        type="number"
+                                        id="aceleracao"
+                                        value="-2">
+                                    </div>
+                                </div>
+                                <button class="botao" onclick="atualizarGrafico()">
+                                    📊 Gerar Gráfico
+                                </button>
+                                <div class="grafico">
+                                    <canvas id="graficoMuv"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- =========================================
+         RODAPÉ
+    ========================================= -->
+
+    <footer class="rodape">
+
+        <p>
+            &copy; 2026 João Pedro.
+            Todos os direitos reservados.
+        </p>
+
+        <p>
+            Físico, Programador & Educador
+        </p>
+
+    </footer>
+
+    <!-- =========================================
+         SCRIPT
+    ========================================= -->
+    <script>
+        function toggleTheme(){
+            const body = document.body;
+            const button = document.querySelector(".tema-toggle");
+            if(body.classList.contains("dark")){
+                body.classList.remove("dark");
+                body.classList.add("light");
+                button.innerHTML = "☀️";
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+            }
+            else{
+                body.classList.remove("light");
+                body.classList.add("dark");
+                button.innerHTML = "🌙";
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+            }
+        }
+        window.onload = () => {
+            const savedTheme = localStorage.getItem("theme");
+            const button = document.querySelector(".tema-toggle");
+            if(savedTheme === "light"){
+                document.body.classList.add("light");
+                button.innerHTML = "☀️";
+            }
+            else{
+                document.body.classList.add("dark");
+                button.innerHTML = "🌙";
+            }
+            atualizarGrafico();
+        }
+        let meuGrafico = null;
+        function calcularMUV(s0, v0, a, t){
+            return s0 +
+            (v0 * t) +
+            (0.5 * a * Math.pow(t, 2));
+        }
+        function atualizarGrafico(){
+            const s0 =
+            parseFloat(
+                document.getElementById(
+                    'posicao_inicial'
+                ).value
+            ) || 0;
+            const v0 =
+            parseFloat(
+                document.getElementById(
+                    'velocidade_inicial'
+                ).value
+            ) || 0;
+            const a =
+            parseFloat(
+                document.getElementById(
+                    'aceleracao'
+                ).value
+            ) || 0;
+            const tempos = [];
+            const posicoes = [];
+            for(let t = 0; t <= 10; t += 0.5){
+                tempos.push(t + "s");
+                posicoes.push(
+                    calcularMUV(
+                        s0,
+                        v0,
+                        a,
+                        t
+                    ).toFixed(2)
+                );
+
+            }
+            if(meuGrafico){
+                meuGrafico.destroy();
+            }
+            const ctx =
+            document.getElementById(
+                'graficoMuv'
+            ).getContext('2d');
+            meuGrafico = new Chart(ctx, {
+                type:'line',
+                data:{
+                    labels:tempos,
+                    datasets:[{
+                        label:'Posição (m)',
+                        data:posicoes,
+                        borderColor:'#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.1)',
+                        borderWidth:3,
+                        fill:true,
+                        tension:0.4
+                    }]
+                },
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

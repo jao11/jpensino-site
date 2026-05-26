@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Serviços | João Pedro</title>
+
+<link rel="icon" type="image/png" href="../imagens/aulas_1.png">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+
+/* ========================= */
+/* CONFIGURAÇÕES GLOBAIS */
+/* ========================= */
+
+:root{
+
+    --bg:#0f172a;
+    --bg-secundario:#111827;
+    --card:#1e293b;
+
+    --texto:#f8fafc;
+    --texto-secundario:#cbd5e1;
+
+    --azul:#3b82f6;
+    --azul-hover:#2563eb;
+
+    --borda:#334155;
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:var(--texto);
+    padding-top:100px;
+}
+/* =========================================
+           NAVBAR
+        ========================================= */
+
+        .barra-navegacao{
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+
+            display:flex;
+
+            justify-content:space-between;
+            align-items:center;
+
+            padding:20px 40px;
+
+            z-index:1000;
+
+            backdrop-filter:blur(14px);
+
+        }
+
+        .logo{
+
+            font-size:1.1rem;
+
+            font-weight:bold;
+
+        }
+
+        .nav-direita{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:25px;
+
+        }
+
+        .menu-links{
+
+            display:flex;
+
+            gap:20px;
+
+        }
+
+        .menu-links a{
+
+            text-decoration:none;
+
+            font-weight:500;
+
+            transition:0.3s;
+
+        }
+
+        .menu-links a.ativo{
+
+            color:#60a5fa;
+
+        }
+
+
+/* ========================= */
+/* CONTAINER */
+/* ========================= */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+
+    text-align:center;
+    padding:60px 0 80px 0;
+
+}
+
+.hero span{
+
+    background:rgba(59,130,246,0.15);
+    color:#93c5fd;
+
+    padding:8px 18px;
+    border-radius:30px;
+
+    font-size:0.9rem;
+
+}
+
+.hero h1{
+
+    font-size:4rem;
+    margin-top:30px;
+    margin-bottom:25px;
+
+    line-height:1.1;
+
+}
+
+.hero p{
+
+    max-width:800px;
+    margin:auto;
+
+    color:var(--texto-secundario);
+
+    line-height:1.8;
+    font-size:1.15rem;
+
+}
+
+/* ========================= */
+/* TÍTULOS */
+/* ========================= */
+
+.titulo-secao{
+
+    font-size:2.5rem;
+    margin-bottom:20px;
+
+}
+
+.subtitulo-secao{
+
+    color:var(--texto-secundario);
+    line-height:1.7;
+    max-width:700px;
+
+    margin-bottom:50px;
+
+}
+
+/* ========================= */
+/* SEÇÕES */
+/* ========================= */
+
+.secao{
+    margin-top:100px;
+}
+
+/* ========================= */
+/* GRID */
+/* ========================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:30px;
+
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.card{
+
+    background:var(--card);
+
+    border:1px solid var(--borda);
+
+    border-radius:18px;
+
+    padding:35px;
+
+    transition:0.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--azul);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+
+}
+
+.card i{
+
+    font-size:2rem;
+    color:#60a5fa;
+
+    margin-bottom:25px;
+
+}
+
+.card h3{
+
+    font-size:1.4rem;
+    margin-bottom:18px;
+
+}
+
+.card p{
+
+    color:var(--texto-secundario);
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.card ul{
+
+    padding-left:20px;
+
+    color:#e2e8f0;
+
+    line-height:1.8;
+
+}
+
+.card li{
+    margin-bottom:8px;
+}
+
+/* ========================= */
+/* BOTÕES */
+/* ========================= */
+
+.botao{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    background:var(--azul);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 24px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+.botao:hover{
+    background:var(--azul-hover);
+}
+
+/* ========================= */
+/* DIFERENCIAL */
+/* ========================= */
+
+.diferencial{
+
+    margin-top:100px;
+
+    background:linear-gradient(
+    135deg,
+    #1e293b,
+    #0f172a);
+
+    border:1px solid #334155;
+
+    border-radius:20px;
+
+    padding:50px;
+
+}
+
+.diferencial h2{
+
+    font-size:2rem;
+    margin-bottom:20px;
+
+}
+
+.diferencial p{
+
+    color:var(--texto-secundario);
+
+    line-height:1.9;
+    font-size:1.05rem;
+
+}
+
+/* ========================= */
+/* CTA FINAL */
+/* ========================= */
+
+.cta{
+
+    margin-top:100px;
+    margin-bottom:80px;
+
+    text-align:center;
+
+    background:#111827;
+
+    border:1px solid #334155;
+
+    border-radius:20px;
+
+    padding:70px 30px;
+
+}
+
+.cta h2{
+
+    font-size:2.3rem;
+    margin-bottom:25px;
+
+}
+
+.cta p{
+
+    color:var(--texto-secundario);
+
+    max-width:700px;
+    margin:auto;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+/* ========================= */
+/* RODAPÉ */
+/* ========================= */
+
+.rodape{
+
+    background:#020617;
+
+    padding:40px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,0.05);
+
+}
+
+.rodape p{
+
+    color:#94a3b8;
+    margin:5px 0;
+
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media(max-width:768px){
+
+    body{
+        padding-top:140px;
+    }
+
+    .barra-navegacao{
+
+        flex-direction:column;
+        gap:15px;
+
+        padding:20px;
+
+    }
+
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+    .titulo-secao{
+        font-size:2rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+     <!-- =========================================
+         NAVBAR
+    ========================================= -->
+
+    <header class="barra-navegacao">
+
+        <div class="logo">
+
+            Professor • Físico • Desenvolvedor
+
+        </div>
+
+        <div class="nav-direita">
+
+            <nav class="menu-links">
+
+                <a href="../index_4.html">
+                    Início
+                </a>
+
+                <a href="../sobre_mim/sobre_mim.html">
+                    Sobre Mim
+                </a>
+
+                <a href="../servicos/servicos_1.html"
+                class="ativo">
+
+                    Serviços
+
+                </a>
+
+                <a href="../material/materiais_1.html">
+                    Materiais
+                </a>
+
+                <a href="../contato/contatos.html">
+                    Contato
+                </a>
+
+            </nav>
+
+            <!-- BOTÃO TEMA -->
+
+            <button class="tema-toggle"
+            onclick="toggleTheme()">
+
+                🌙
+
+            </button>
+
+        </div>
+
+    </header>
+
+<!-- HERO -->
+
+<section class="hero container">
+
+    <span>
+        Educação • Tecnologia • Dados
+    </span>
+
+    <h1>
+        Soluções em Ensino & Desenvolvimento
+    </h1>
+
+    <p>
+        Aulas particulares de Física e Matemática,
+        preparação para vestibulares e desenvolvimento
+        de soluções digitais modernas com foco em
+        automação, websites e análise de dados.
+    </p>
+
+</section>
+
+<!-- AULAS -->
+
+<section class="secao container">
+
+    <h2 class="titulo-secao">
+        Aulas Particulares
+    </h2>
+
+    <p class="subtitulo-secao">
+
+        Ensino personalizado para alunos do Ensino Fundamental,
+        Médio e Superior com foco em aprendizado real,
+        autonomia e resultados em vestibulares.
+
+    </p>
+
+    <div class="grid">
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h3>
+                Preparação ENEM & UERJ
+            </h3>
+
+            <p>
+
+                Treinamento focado em provas de alta concorrência
+                com estratégia, recorrência e resolução rápida.
+
+            </p>
+
+            <ul>
+
+                <li>Simulados direcionados</li>
+                <li>Estratégias de prova</li>
+                <li>Acompanhamento individual</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Quero Passar
+            </a>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-book"></i>
+
+            <h3>
+                Reforço Escolar & Universitário
+            </h3>
+
+            <p>
+
+                Aulas personalizadas de Física,
+                Matemática, Cálculo e disciplinas
+                universitárias.
+
+            </p>
+
+            <ul>
+
+                <li>Ensino Fundamental ao Superior</li>
+                <li>Listas personalizadas</li>
+                <li>Suporte contínuo</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Agendar Aula
+            </a>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-laptop"></i>
+
+            <h3>
+                Aulas Online
+            </h3>
+
+            <p>
+
+                Plataforma organizada para acompanhamento
+                remoto utilizando Zoom, Google Classroom
+                e materiais próprios.
+
+            </p>
+
+            <ul>
+
+                <li>Google Classroom</li>
+                <li>Material digital</li>
+                <li>Ensino híbrido</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Saber Mais
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TECNOLOGIA -->
+
+<section class="secao container">
+
+    <h2 class="titulo-secao">
+        Desenvolvimento & Dados
+    </h2>
+
+    <p class="subtitulo-secao">
+
+        Desenvolvimento de soluções digitais,
+        automações e análise computacional
+        aplicadas a negócios, produtividade
+        e tecnologia.
+
+    </p>
+
+    <div class="grid">
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <h3>
+                Desenvolvimento de Websites
+            </h3>
+
+            <p>
+
+                Criação de sites modernos,
+                responsivos e rápidos para
+                profissionais e empresas.
+
+            </p>
+
+            <ul>
+
+                <li>Landing Pages</li>
+                <li>Portfólios</li>
+                <li>Sites institucionais</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Solicitar Projeto
+            </a>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-gear"></i>
+
+            <h3>
+                Automação & Ferramentas
+            </h3>
+
+            <p>
+
+                Desenvolvimento de sistemas,
+                automações e ferramentas
+                para otimizar tarefas.
+
+            </p>
+
+            <ul>
+
+                <li>Automação de processos</li>
+                <li>Planilhas inteligentes</li>
+                <li>Sistemas personalizados</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Conversar
+            </a>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h3>
+                Dados & Machine Learning
+            </h3>
+
+            <p>
+
+                Análise de dados e soluções
+                computacionais utilizando
+                programação e inteligência analítica.
+
+            </p>
+
+            <ul>
+
+                <li>Visualização de dados</li>
+                <li>Dashboards</li>
+                <li>Machine Learning</li>
+
+            </ul>
+
+            <a href="../contato/contatos.html"
+            class="botao">
+                Ver Possibilidades
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DIFERENCIAL -->
+
+<section class="container">
+
+    <div class="diferencial">
+
+        <h2>
+            Mentalidade Científica Aplicada
+        </h2>
+
+        <p>
+
+            Minha formação em Física e experiência
+            com programação me permitem abordar
+            problemas de maneira analítica,
+            estruturada e eficiente.
+
+            Seja em aulas particulares,
+            desenvolvimento de sistemas
+            ou análise computacional,
+            o foco é sempre gerar resultados
+            concretos com clareza e precisão.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="container">
+
+    <div class="cta">
+
+        <h2>
+            Vamos construir algo juntos?
+        </h2>
+
+        <p>
+
+            Seja para melhorar seu desempenho
+            em exatas ou desenvolver uma solução
+            tecnológica personalizada.
+
+        </p>
+
+        <a href="../contato/contatos.html"
+        class="botao">
+            Entrar em Contato
+        </a>
+
+    </div>
+
+</section>
+
+<!-- RODAPÉ -->
+
+<footer class="rodape">
+
+    <p>
+        © 2026 João Pedro
+    </p>
+
+    <p>
+        Físico • Desenvolvedor • Educador
+    </p>
+
+</footer>
+
+</body>
+</html>
